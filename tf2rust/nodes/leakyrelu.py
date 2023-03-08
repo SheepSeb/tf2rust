@@ -23,3 +23,11 @@ class LeakyReLU(Node):
                 node=self, input=self.parents_name[0]
                 )
             ]
+        else:
+            return[
+                "let {declare_mut}out_{node.name} = tensorflow_layers::Activation::LeakyRelu({node.theta}).activation(&out_{input});".format(
+                    declare_mut=self._format_mut(),
+                    node=self,
+                    input=self.parents_name[0],
+                )
+            ]
